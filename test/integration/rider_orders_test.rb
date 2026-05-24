@@ -2,6 +2,8 @@ require "test_helper"
 
 class RiderOrdersTest < ActionDispatch::IntegrationTest
   setup do
+    OrderItem.delete_all
+    Order.delete_all
     @rider = User.create!(email: "rider@example.com", password: "password123", role: :rider)
     @other_rider = User.create!(email: "other@example.com", password: "password123", role: :rider)
     @product = Product.create!(name: "Margarita", price: 150)
