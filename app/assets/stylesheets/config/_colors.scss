@@ -1,10 +1,18 @@
-// Define variables for your color scheme
+// PizzApp design tokens — brand "verde albahaca"
+$brand:       #16A34A;
+$bg:          #EFEFF3;
+$panel:       #FFFFFF;
+$ink:         #191B22;
+$ink-2:       #4B5160;
+$muted:       #8A8F9C;
+$line:        #E7E7EE;
 
-// For example:
-$red: #FD1015;
-$blue: #0D6EFD;
-$yellow: #FFC65A;
-$orange: #E67E22;
-$green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+// Status accents (dot / pill background / pill text)
+$pending:     #D99A2B;  $pending-bg:  #FBF0D8;  $pending-tx:  #8A5B12;
+$assigned:    #5B72E8;  $assigned-bg: #E9EBFB;  $assigned-tx: #3742A6;
+$en-route:    #F2683C;  $en-route-bg: #FCE7DD;  $en-route-tx: #B0441F;
+$delivered:   #2FA968;  $delivered-bg:#DFF3E7;  $delivered-tx:#1A7546;
+
+// Keep a couple of legacy aliases used by the template's partials
+$light-gray:  $bg;
+$gray:        $ink;
