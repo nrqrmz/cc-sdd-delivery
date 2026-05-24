@@ -6,6 +6,7 @@ export default class extends Controller {
   static values = { apiKey: String, lat: Number, lng: Number }
 
   connect() {
+    if (!this.apiKeyValue) return
     mapboxgl.accessToken = this.apiKeyValue
     this.map = new mapboxgl.Map({
       container: this.element,

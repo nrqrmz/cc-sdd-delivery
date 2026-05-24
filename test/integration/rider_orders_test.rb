@@ -49,4 +49,11 @@ class RiderOrdersTest < ActionDispatch::IntegrationTest
     assert_response :not_found
     assert theirs.reload.assigned?
   end
+
+  test "rider cannot skip straight to delivered and sees an alert" do
+    order = create_order(rider: @rider, status: :assigned)
+    patch rider_order_path(order), params: { transition: "delivered" }
+    assert_redirected_to rider_orders_path
+    assert order.reload.assigned?
+  end
 end

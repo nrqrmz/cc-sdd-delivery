@@ -14,8 +14,11 @@ module Rider
 
     def update
       @order = current_user.assigned_orders.find(params[:id])
-      advance(@order, params[:transition])
-      redirect_to rider_orders_path, notice: "Estado actualizado."
+      if advance(@order, params[:transition])
+        redirect_to rider_orders_path, notice: "Estado actualizado."
+      else
+        redirect_to rider_orders_path, alert: "No se pudo cambiar el estado."
+      end
     end
 
     private
