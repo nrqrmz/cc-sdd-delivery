@@ -4,7 +4,7 @@
   <header class="board__top">
     <div>
       <h1 class="board__title">Tablero de órdenes</h1>
-      <p class="board__sub"><%= Order.where.not(status: :delivered).count %> órdenes activas</p>
+      <p class="board__sub"><%= @active_count %> órdenes activas</p>
     </div>
     <%= link_to new_manager_order_path, class: "btn btn-brand" do %>
       <i class="fa-solid fa-plus"></i> Nueva orden

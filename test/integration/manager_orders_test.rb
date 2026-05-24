@@ -69,4 +69,11 @@ class ManagerOrdersTest < ActionDispatch::IntegrationTest
     assert order.reload.assigned?
     assert_equal @rider, order.rider
   end
+
+  test "update with a blank rider does not assign and keeps the order pending" do
+    order = create_order(status: :pending)
+    patch manager_order_path(order), params: { order: { rider_id: "" } }
+    assert_redirected_to manager_order_path(order)
+    assert order.reload.pending?
+  end
 end
