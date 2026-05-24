@@ -18,14 +18,24 @@
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
     <link rel="apple-touch-icon" href="/icon.png">
 
+    <link href="https://api.mapbox.com/mapbox-gl-js/v3.7.0/mapbox-gl.css" rel="stylesheet">
     <%# Includes all stylesheet files in app/assets/stylesheets %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body><%= render "shared/navbar" %>
-<%= render "shared/flashes" %>
-
-    <%= yield %>
+  <body>
+    <% if user_signed_in? %>
+      <div class="app-shell">
+        <%= render "shared/sidebar" %>
+        <main class="app-shell__main">
+          <%= render "shared/flashes" %>
+          <%= yield %>
+        </main>
+      </div>
+    <% else %>
+      <%= render "shared/flashes" %>
+      <%= yield %>
+    <% end %>
   </body>
 </html>
