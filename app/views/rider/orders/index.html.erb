@@ -1,0 +1,20 @@
+<% content_for :title, "Mis entregas" %>
+
+<div class="page-narrow">
+  <h1 class="board__title">Mis entregas</h1>
+
+  <% if @active_orders.any? %>
+    <div class="rider-list">
+      <%= render partial: "card", collection: @active_orders, as: :order %>
+    </div>
+  <% else %>
+    <p class="empty-state">No tienes entregas activas. 🎉</p>
+  <% end %>
+
+  <% if @delivered_orders.any? %>
+    <h2 class="board__sub">Entregadas</h2>
+    <div class="rider-list rider-list--muted">
+      <%= render partial: "card", collection: @delivered_orders, as: :order %>
+    </div>
+  <% end %>
+</div>
