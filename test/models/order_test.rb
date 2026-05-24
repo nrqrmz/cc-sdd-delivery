@@ -47,6 +47,20 @@ class OrderTest < ActiveSupport::TestCase
     assert order.valid?
   end
 
+  test "geocodes the address on save" do
+    order = create_order
+    assert_equal 19.4326, order.latitude
+    assert_equal(-99.1332, order.longitude)
+  end
+
+  test "does not re-geocode when address is unchanged" do
+    order = create_order
+    order.latitude = 0.0
+    order.longitude = 0.0
+    order.update!(recipient_name: "Otra persona") # address unchanged
+    assert_equal 0.0, order.latitude # geocode callback did not overwrite
+  end
+
   test "assign_to! moves pending -> assigned and sets the rider" do
     rider = User.create!(email: "r@example.com", password: "password123", role: :rider)
     order = create_order

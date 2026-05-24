@@ -8,6 +8,9 @@ class Order < ApplicationRecord
   validates :recipient_name, :recipient_phone, :address, presence: true
   validate :must_have_at_least_one_item
 
+  geocoded_by :address
+  after_validation :geocode, if: -> { address.present? && address_changed? }
+
   def total
     order_items.reject(&:marked_for_destruction?).sum(&:subtotal)
   end
