@@ -23,4 +23,28 @@ class RiderOrdersTest < ActionDispatch::IntegrationTest
     # Two assigned orders exist but only the current rider's own one is listed.
     assert_select ".order-card", 1
   end
+
+  test "rider advances assigned -> en_route -> delivered on own order" do
+    order = create_order(rider: @rider, status: :assigned)
+
+    patch rider_order_path(order), params: { transition: "en_route" }
+    assert order.reload.en_route?
+
+    patch rider_order_path(order), params: { transition: "delivered" }
+    assert order.reload.delivered?
+    assert_redirected_to rider_orders_path
+  end
+
+  test "rider cannot view another rider's order" do
+    theirs = create_order(rider: @other_rider, status: :assigned)
+    get rider_order_path(theirs)
+    assert_response :not_found
+  end
+
+  test "rider cannot advance another rider's order" do
+    theirs = create_order(rider: @other_rider, status: :assigned)
+    patch rider_order_path(theirs), params: { transition: "en_route" }
+    assert_response :not_found
+    assert theirs.reload.assigned?
+  end
 end
