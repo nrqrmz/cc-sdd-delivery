@@ -65,4 +65,18 @@ class RiderOrdersTest < ActionDispatch::IntegrationTest
     assert_select ".order-map[data-map-lat-value]"
     assert_select ".order-map[data-map-lng-value]"
   end
+
+  test "rider pages use the top-bar layout, not the shared sidebar" do
+    order = create_order(rider: @rider, status: :assigned)
+
+    get rider_orders_path
+    assert_response :success
+    assert_select ".rider-topbar"
+    assert_select ".sidebar", false
+
+    get rider_order_path(order)
+    assert_response :success
+    assert_select ".rider-topbar"
+    assert_select ".sidebar", false
+  end
 end
