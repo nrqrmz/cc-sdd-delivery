@@ -8,6 +8,11 @@ else
     lookup: :mapbox,
     api_key: ENV["MAPBOX_API_KEY"],
     units: :km,
-    timeout: 5
+    timeout: 5,
+    params: {
+      country: "mx",                  # restrict results to Mexico
+      proximity: "-99.1332,19.4326",  # lng,lat — bias ranking toward CDMX center
+      language: "es"
+    }
   )
 end

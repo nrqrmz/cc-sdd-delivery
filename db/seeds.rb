@@ -23,15 +23,16 @@ products = {
 
 puts "Creating orders…"
 samples = [
-  { name: "Ana Gómez",  phone: "5512345678", address: "Av. Álvaro Obregón 64, Roma Norte, CDMX",
+  # Addresses on the Paseo de la Reforma skyscraper corridor (Ángel ↔ Diana) for a striking 3D map.
+  { name: "Ana Gómez",  phone: "5512345678", address: "Paseo de la Reforma 505, Cuauhtémoc, 06500 Ciudad de México, CDMX", # Torre Mayor
     status: :pending,  rider: nil,        items: [ [ :margarita, 1 ], [ :coca, 1 ] ] },
-  { name: "Carla Ruiz", phone: "5512345679", address: "Calle Orizaba 12, Roma Norte, CDMX",
+  { name: "Carla Ruiz", phone: "5512345679", address: "Paseo de la Reforma 483, Cuauhtémoc, 06500 Ciudad de México, CDMX", # Torre Reforma
     status: :pending,  rider: nil,        items: [ [ :pepperoni, 2 ], [ :agua, 1 ] ] },
-  { name: "Beto Salas", phone: "5512345680", address: "Av. Insurgentes Sur 300, CDMX",
+  { name: "Beto Salas", phone: "5512345680", address: "Paseo de la Reforma 510, Cuauhtémoc, 06500 Ciudad de México, CDMX", # Torre BBVA
     status: :assigned, rider: riders[0],  items: [ [ :hawaiana, 1 ], [ :margarita, 1 ] ] },
-  { name: "Luis Mora",  phone: "5512345681", address: "Córdoba 210, Roma Norte, CDMX",
+  { name: "Luis Mora",  phone: "5512345681", address: "Paseo de la Reforma 509, Cuauhtémoc, 06500 Ciudad de México, CDMX", # Chapultepec Uno
     status: :en_route, rider: riders[0],  items: [ [ :pepperoni, 3 ], [ :coca, 1 ] ] },
-  { name: "María Díaz", phone: "5512345682", address: "Colima 143, Roma Norte, CDMX",
+  { name: "María Díaz", phone: "5512345682", address: "Av. Paseo de la Reforma 222, Juárez, 06600 Ciudad de México, CDMX", # Reforma 222
     status: :delivered, rider: riders[1], items: [ [ :hawaiana, 1 ], [ :agua, 1 ] ] }
 ]
 
