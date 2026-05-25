@@ -96,4 +96,19 @@ class RiderOrdersTest < ActionDispatch::IntegrationTest
     assert_select ".rider-topbar"
     assert_select ".sidebar", false
   end
+
+  test "show renders the primary action button for an active order" do
+    order = create_order(rider: @rider, status: :assigned)
+    get rider_order_path(order)
+    assert_response :success
+    assert_select ".rider-detail__actions .rider-detail__cta", text: "Marcar en camino"
+  end
+
+  test "show shows a completed state and no action button when delivered" do
+    order = create_order(rider: @rider, status: :delivered)
+    get rider_order_path(order)
+    assert_response :success
+    assert_select ".rider-detail__cta", false
+    assert_select ".rider-detail__actions .empty-state", text: /Entrega completada/
+  end
 end

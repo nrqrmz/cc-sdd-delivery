@@ -119,6 +119,7 @@
   border: 0;
   border-bottom: 1px solid $line;
   border-radius: 0;
+  overflow: hidden;
 }
 
 // Items as a list (replaces the <table>).
@@ -154,7 +155,7 @@
   padding-bottom: calc(12px + env(safe-area-inset-bottom));
   background: linear-gradient(180deg, rgba($bg, 0), $bg 38%);
 
-  form { margin: 0; }
+  form { margin: 0; display: block; }
   .rider-detail__cta { width: 100%; padding: 15px; font-size: 15px; }
   .empty-state { text-align: center; padding: 14px 0; }
 }
@@ -166,6 +167,7 @@
     margin: 0 0 6px;
     border: 1px solid $line;
     border-radius: 16px;
+    overflow: hidden;
   }
   .rider-detail__actions {
     position: static;
