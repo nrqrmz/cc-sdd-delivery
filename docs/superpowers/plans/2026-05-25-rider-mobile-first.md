@@ -1,6 +1,6 @@
 # Rider mobile-first Implementation Plan
 
-> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
+> **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [x]`) syntax for tracking.
 
 **Goal:** Make the rider experience mobile-first — a compact top-bar layout and an order-detail screen where the map is the protagonist — without changing anything the manager sees.
 
@@ -42,7 +42,7 @@ Give the rider its own layout (top bar at all sizes); leave the manager on the s
 - Modify: `app/assets/stylesheets/pages/_index.scss`
 - Test: `test/integration/rider_orders_test.rb`, `test/integration/manager_orders_test.rb`
 
-- [ ] **Step 1: Write the failing test (rider uses top-bar layout, not sidebar)**
+- [x] **Step 1: Write the failing test (rider uses top-bar layout, not sidebar)**
 
 Add to `test/integration/rider_orders_test.rb` (inside the class, after the last test):
 
@@ -62,12 +62,12 @@ Add to `test/integration/rider_orders_test.rb` (inside the class, after the last
   end
 ```
 
-- [ ] **Step 2: Run the test to verify it fails**
+- [x] **Step 2: Run the test to verify it fails**
 
 Run: `bin/rails test test/integration/rider_orders_test.rb -n "/top-bar layout/"`
 Expected: FAIL — `.rider-topbar` not found and `.sidebar` present (rider still uses `application.html.erb`).
 
-- [ ] **Step 3: Create the rider layout**
+- [x] **Step 3: Create the rider layout**
 
 Create `app/views/layouts/rider.html.erb`:
 
@@ -118,7 +118,7 @@ Create `app/views/layouts/rider.html.erb`:
 
 (`Rider::BaseController` already requires an authenticated rider, so the layout can assume `current_user` exists.)
 
-- [ ] **Step 4: Point the rider namespace at the new layout**
+- [x] **Step 4: Point the rider namespace at the new layout**
 
 In `app/controllers/rider/base_controller.rb`, add `layout "rider"` so the class reads:
 
@@ -137,7 +137,7 @@ module Rider
 end
 ```
 
-- [ ] **Step 5: Create the rider stylesheet (topbar + shell) and register it**
+- [x] **Step 5: Create the rider stylesheet (topbar + shell) and register it**
 
 Create `app/assets/stylesheets/pages/_rider.scss`:
 
@@ -234,12 +234,12 @@ Then add the import to `app/assets/stylesheets/pages/_index.scss` (keep existing
 @import "rider";
 ```
 
-- [ ] **Step 6: Run the test to verify it passes**
+- [x] **Step 6: Run the test to verify it passes**
 
 Run: `bin/rails test test/integration/rider_orders_test.rb -n "/top-bar layout/"`
 Expected: PASS.
 
-- [ ] **Step 7: Add the manager regression guard**
+- [x] **Step 7: Add the manager regression guard**
 
 Add to `test/integration/manager_orders_test.rb` (inside the class):
 
@@ -252,12 +252,12 @@ Add to `test/integration/manager_orders_test.rb` (inside the class):
   end
 ```
 
-- [ ] **Step 8: Run the manager regression test**
+- [x] **Step 8: Run the manager regression test**
 
 Run: `bin/rails test test/integration/manager_orders_test.rb -n "/no rider chrome/"`
 Expected: PASS (manager untouched).
 
-- [ ] **Step 9: Commit**
+- [x] **Step 9: Commit**
 
 ```bash
 git add app/controllers/rider/base_controller.rb app/views/layouts/rider.html.erb \
@@ -282,7 +282,7 @@ Restructure `rider#show` so the map leads, the action button is fixed at the bot
 - Modify: `app/assets/stylesheets/pages/_rider.scss`
 - Test: `test/integration/rider_orders_test.rb`
 
-- [ ] **Step 1: Write the failing tests (items as list, no call/navigate)**
+- [x] **Step 1: Write the failing tests (items as list, no call/navigate)**
 
 Add to `test/integration/rider_orders_test.rb`:
 
@@ -305,12 +305,12 @@ Add to `test/integration/rider_orders_test.rb`:
   end
 ```
 
-- [ ] **Step 2: Run the tests to verify they fail**
+- [x] **Step 2: Run the tests to verify they fail**
 
 Run: `bin/rails test test/integration/rider_orders_test.rb -n "/items as a list|call or navigate/"`
 Expected: FAIL — `ul.rider-items` not found, `table.order-items` still present.
 
-- [ ] **Step 3: Rewrite the rider show view**
+- [x] **Step 3: Rewrite the rider show view**
 
 Replace the entire contents of `app/views/rider/orders/show.html.erb` with:
 
@@ -368,17 +368,17 @@ Replace the entire contents of `app/views/rider/orders/show.html.erb` with:
 
 (The map keeps the `order-map` class + `data-map-*` attributes, so the existing "show wires the order map element" test stays green; sizing is overridden under `.rider-shell` in the next step.)
 
-- [ ] **Step 4: Run the tests to verify they pass**
+- [x] **Step 4: Run the tests to verify they pass**
 
 Run: `bin/rails test test/integration/rider_orders_test.rb -n "/items as a list|call or navigate/"`
 Expected: PASS.
 
-- [ ] **Step 5: Run the whole rider suite to confirm no regression**
+- [x] **Step 5: Run the whole rider suite to confirm no regression**
 
 Run: `bin/rails test test/integration/rider_orders_test.rb`
 Expected: PASS (including the pre-existing "show wires the order map element" test).
 
-- [ ] **Step 6: Add the detail styles (map protagonist, items list, sticky action)**
+- [x] **Step 6: Add the detail styles (map protagonist, items list, sticky action)**
 
 Append to `app/assets/stylesheets/pages/_rider.scss`:
 
@@ -481,7 +481,7 @@ Append to `app/assets/stylesheets/pages/_rider.scss`:
 }
 ```
 
-- [ ] **Step 7: Commit**
+- [x] **Step 7: Commit**
 
 ```bash
 git add app/views/rider/orders/show.html.erb app/assets/stylesheets/pages/_rider.scss \
@@ -500,32 +500,32 @@ EOF
 
 CSS/responsive behavior isn't covered by Minitest — verify it live. This task has no code; it confirms the spec's acceptance criteria. Requires the app running (`bin/dev`) with `MAPBOX_API_KEY` set in `.env`, and seed data with an assigned/en_route order for a rider (`bin/rails db:seed:replant` if needed).
 
-- [ ] **Step 1: Log in as a rider and open Mis entregas (mobile)**
+- [x] **Step 1: Log in as a rider and open Mis entregas (mobile)**
 
 Resize the Playwright browser to 375×812, navigate to the app, log in as a rider, go to `/rider/orders`.
 Expected: a compact **top bar** (logo + avatar + Salir), full-width list of `.order-card`s, **no** 228px dark sidebar, no horizontal scroll.
 
-- [ ] **Step 2: Open an order detail (mobile) and check map-protagonist + sticky action**
+- [x] **Step 2: Open an order detail (mobile) and check map-protagonist + sticky action**
 
 Click an active delivery.
 Expected: the **map sits at the top, full-bleed and tall**; below it the name + status pill, address/phone (text, **no** Call/Navigate buttons), items as a list, and the **action button fixed at the bottom** of the viewport (visible without scrolling to it). Confirm the map actually renders (3D fly-in / branded pin). Take a screenshot of the `.rider-detail` element.
 
-- [ ] **Step 3: Advance the order**
+- [x] **Step 3: Advance the order**
 
 Tap "Marcar en camino" (or "Marcar entregada").
 Expected: redirect to `/rider/orders` with the success flash; status updated.
 
-- [ ] **Step 4: Check desktop rendering**
+- [x] **Step 4: Check desktop rendering**
 
 Resize to ~1280×800, reload `/rider/orders` and an order detail.
 Expected: top bar still used (no sidebar); content centered in a narrow column; map inside the column with rounded corners; action button static (not sticky), normal width.
 
-- [ ] **Step 5: Manager regression check**
+- [x] **Step 5: Manager regression check**
 
 Log out, log in as a **manager**, open `/manager/orders` and a `/manager/orders/:id`.
 Expected: **unchanged** — dark 228px sidebar present, kanban board, order detail with the original `<table>` and map. No `.rider-topbar`. Compare against current `master` look if in doubt.
 
-- [ ] **Step 6: Record the result**
+- [x] **Step 6: Record the result**
 
 Note pass/fail per criterion in the PR description (and attach the mobile detail screenshot). If anything fails, fix in Task 1/2 and re-verify before continuing.
 
@@ -533,22 +533,22 @@ Note pass/fail per criterion in the PR description (and attach the mobile detail
 
 ## Task 4: Full CI and finish
 
-- [ ] **Step 1: RuboCop**
+- [x] **Step 1: RuboCop**
 
 Run: `bin/rubocop`
 Expected: clean (no offenses). Fix any reported in the files you touched.
 
-- [ ] **Step 2: Full test suite**
+- [x] **Step 2: Full test suite**
 
 Run: `bin/rails test`
 Expected: all green.
 
-- [ ] **Step 3: Full CI pipeline (source of truth)**
+- [x] **Step 3: Full CI pipeline (source of truth)**
 
 Run: `bin/ci`
 Expected: setup + RuboCop + security scanners + tests + seed replant all pass.
 
-- [ ] **Step 4: Finish the branch**
+- [x] **Step 4: Finish the branch**
 
 Use the `superpowers:finishing-a-development-branch` skill to open the PR from `feature/rider-mobile-first` (per project workflow: spec + plan + PR). Include the spec/plan links, the acceptance-criteria results, and the mobile screenshot from Task 3.
 
