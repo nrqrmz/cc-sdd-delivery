@@ -107,8 +107,9 @@ Verificar las dos caras del callback:
 - `assign_to!` (transición `pending → assigned`) **no** encola el job.
 - Un update no relacionado con status (ej. cambiar `recipient_phone`) **no** encola el job.
 
-Usar `assert_enqueued_with(job: Turbo::Streams::BroadcastJob)` y `assert_no_enqueued_jobs`
-con el adapter de test estándar.
+Usar `assert_enqueued_with(job: Turbo::Streams::BroadcastStreamJob)` y
+`assert_no_enqueued_jobs(only: Turbo::Streams::BroadcastStreamJob)` con el adapter de test
+estándar (`broadcast_refresh_later_to` encola `BroadcastStreamJob` en turbo-rails 2.0).
 
 ### System test (opcional)
 
